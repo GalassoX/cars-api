@@ -9,6 +9,10 @@ app.get('/', (req, res) => {
   const results: any[] = [];
 
   fs.createReadStream('./cars.csv')
+    .on('error', (error) => {
+      console.error('Error reading CSV file:', error);
+      res.status(500).json({ error: 'Failed to read CSV file' });
+    })
     .pipe(csv())
     .on('data', (data) => results.push(data))
     .on('end', () => {
