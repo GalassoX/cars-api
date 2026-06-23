@@ -1,25 +1,18 @@
-import csv from 'csv-parser';
-import fs from 'node:fs';
 import express from 'express';
 import { PORT } from './lib/constants.js';
+import router from './router/index.js';
+import { handleExceptions } from './middlewares/handleExceptions.js';
+import { logExceptions } from './middlewares/logExceptions.js';
 
 const app = express();
 
-app.get('/', (req, res) => {
-  const results: any[] = [];
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-  fs.createReadStream('./cars.csv')
-    .on('error', (error) => {
-      console.error('Error reading CSV file:', error);
-      res.status(500).json({ error: 'Failed to read CSV file' });
-    })
-    .pipe(csv())
-    .on('data', (data) => results.push(data))
-    .on('end', () => {
-      console.log('CSV file successfully processed');
-      res.json({ cars: results });
-    });
-});
+app.use('/api', router);
+
+app.use(logExceptions);
+app.use(handleExceptions);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
