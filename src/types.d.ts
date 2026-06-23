@@ -17,6 +17,7 @@ export type CarInfoCSV = {
 }
 
 export type CarInfo = {
+  id: number;
   make: string;
   model: string;
   type: string;

@@ -2,55 +2,55 @@ import { db } from "../database/index.js";
 import type { CarInfo } from "../types.js";
 
 export async function findCar(car: Partial<CarInfo>, isSuggestion: boolean): Promise<CarInfo[]> {
-  const query = db.selectFrom('cars').selectAll();
+  let query = db.selectFrom('cars').selectAll();
 
   if (car.make) {
-    query.where('make', '=', car.make);
+    query = query.where('cars.make', '=', car.make);
   }
   if (car.model) {
-    query.where('model', '=', car.model);
+    query = query.where('cars.model', '=', car.model);
   }
   if (car.type) {
-    query.where('cars.type', '=', car.type);
+    query = query.where('cars.type', '=', car.type);
   }
   if (car.origin) {
-    query.where('cars.origin', '=', car.origin);
+    query = query.where('cars.origin', '=', car.origin);
   }
   if (car.drivetrain) {
-    query.where('cars.drivetrain', '=', car.drivetrain);
+    query = query.where('cars.drivetrain', '=', car.drivetrain);
   }
   if (car.msrp) {
-    query.where('cars.msrp', '=', car.msrp);
+    query = query.where('cars.msrp', '=', car.msrp);
   }
   if (car.invoice) {
-    query.where('cars.invoice', '=', car.invoice);
+    query = query.where('cars.invoice', '=', car.invoice);
   }
   if (car.engine_size) {
-    query.where('cars.engine_size', '=', car.engine_size);
+    query = query.where('cars.engine_size', '=', car.engine_size);
   }
   if (car.cylinders) {
-    query.where('cars.cylinders', '=', car.cylinders);
+    query = query.where('cars.cylinders', '=', car.cylinders);
   }
   if (car.horsepower) {
-    query.where('cars.horsepower', '=', car.horsepower);
+    query = query.where('cars.horsepower', '=', car.horsepower);
   }
   if (car.mpg_city) {
-    query.where('cars.mpg_city', '=', car.mpg_city);
+    query = query.where('cars.mpg_city', '=', car.mpg_city);
   }
   if (car.mpg_highway) {
-    query.where('cars.mpg_highway', '=', car.mpg_highway);
+    query = query.where('cars.mpg_highway', '=', car.mpg_highway);
   }
   if (car.weight) {
-    query.where('cars.weight', '=', car.weight);
+    query = query.where('cars.weight', '=', car.weight);
   }
   if (car.wheelbase) {
-    query.where('cars.wheelbase', '=', car.wheelbase);
+    query = query.where('cars.wheelbase', '=', car.wheelbase);
   }
   if (car.length) {
-    query.where('cars.length', '=', car.length);
+    query = query.where('cars.length', '=', car.length);
   }
   if (isSuggestion) {
-    query.where('is_suggestion', '=', true);
+    query = query.where('is_suggestion', '=', true);
   }
   return query.execute();
 }

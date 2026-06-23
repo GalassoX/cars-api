@@ -10,6 +10,6 @@ export async function getCars(req: Request, res: Response): Promise<void> {
 
   createSuccessResponse(res, {
     statusCode: HttpStatus.Ok,
-    data: result.map(({ is_suggestion, ...car }) => car),
+    data: result.map(({ id, is_suggestion, ...car }) => car),
   });
 }
