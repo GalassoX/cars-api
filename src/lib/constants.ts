@@ -1,10 +1,12 @@
+import { ENV_VARS } from "./environment.js";
+
 export const PORT = process.env.PORT || 3000;
 
 export const CSV_FILE_PATH = 'cars.csv';
 
 export const DB_CONFIG = {
-  url: process.env.TURSO_DB_TURSO_DATABASE_URL || '',
-  authToken: process.env.TURSO_DB_TURSO_AUTH_TOKEN || ''
+  url: ENV_VARS.TURSO_DATABASE_URL,
+  authToken: ENV_VARS.TURSO_AUTH_TOKEN
 }
 
 export const ERROR_MESSAGES = {
