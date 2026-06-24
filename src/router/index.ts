@@ -3,6 +3,6 @@ import carsRouter from './car.router.js';
 
 const router: Router = Router();
 
-router.use('/cars', carsRouter);
+router.use('/api/cars', carsRouter);
 
 export default router;
